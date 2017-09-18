@@ -1,15 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import YTSearch from 'youtube-api-search';
+import SearchBar from './components/search_bar';
 
-import App from './components/app';
-import reducers from './reducers';
+const API_KEY = 'AIzaSyAZs1LCgYEST_DJCmL3hAiXyNuE3znYqHs';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+YTSearch({key: API_KEY, term: 'boku no pico'}, function() {
+	console.log(data);
+})
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+
+// Create a new component to produce some HTML
+const App = () => {
+	return ( 
+	<div>
+		<SearchBar />
+	</div>
+	);
+}
+
+// Insert into DOM
+ReactDOM.render(<App />, document.querySelector('.container'));
